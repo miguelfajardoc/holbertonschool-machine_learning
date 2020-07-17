@@ -3,6 +3,8 @@
 
 
 def matrix_shape(mat1):
+    """Return the shape of the matrix in all of his dimensions"""
+
     shape = []
     while(1):
         if isinstance(mat1, list):
