@@ -6,7 +6,8 @@ def cat_arrays(arr1, arr2):
     """ concatenates 2 list and return the concatenation in a new list """
 
     cat = []
-    cat.append(arr1)
-    cat.append(arr2)
+    for element in arr1:
+        cat.append(element)
+    for element in arr2:
+        cat.append(element)
     return cat
-    
