@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Return the shape of the matrix in all of his dimensions"""
 
 
 def matrix_shape(mat1):
