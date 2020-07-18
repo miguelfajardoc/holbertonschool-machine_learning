@@ -6,7 +6,7 @@ def add_matrices2D(mat1, mat2):
     """ function that add wisely matrices """
 
     if not mat1 or not mat2:
-        return None
+        return mat1
     if matrix_shape(mat1) != matrix_shape(mat2):
         return None
 
