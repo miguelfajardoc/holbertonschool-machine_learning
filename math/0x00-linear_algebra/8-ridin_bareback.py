@@ -8,6 +8,10 @@ def mat_mul(mat1, mat2):
     multMatrix = []
     shapem1 = matrix_shape(mat1)
     shapem2 = matrix_shape(mat2)
+
+    if shapem1[1] != shapem2[0]:
+        return None
+
     multIndex = shapem1[1]
 
     for mat1Index in range(shapem1[0]):
