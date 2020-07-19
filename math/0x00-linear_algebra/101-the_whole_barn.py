@@ -21,7 +21,6 @@ def add_matrices(mat1, mat2):
     return addedList
 
 
-
 def matrix_shape(mat1):
     """Return the shape of the matrix in all of his dimensions"""
 
