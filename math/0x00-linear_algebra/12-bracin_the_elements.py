@@ -13,4 +13,3 @@ def np_elementwise(mat1, mat2):
     division = mat1 / mat2
 
     return addition, subtraction, multiplication, division
-  
