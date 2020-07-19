@@ -11,4 +11,6 @@ def matrix_shape(mat1):
             shape.append(len(mat1))
         else:
             return shape
+        if len(mat1) == 0:
+            return shape
         mat1 = mat1[0]
