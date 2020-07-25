@@ -4,5 +4,5 @@ summation_i_squared = __import__('9-sum_total').summation_i_squared
 
 n = "56ds5"
 print(summation_i_squared(n))
-n = 56.5
+n = 5.5
 print(summation_i_squared(n))
