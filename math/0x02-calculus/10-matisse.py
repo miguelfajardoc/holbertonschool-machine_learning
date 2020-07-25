@@ -10,6 +10,8 @@ def poly_derivative(poly):
         return [0]
 
     for i in range(2, len(poly)):
+        if not isinstance(poly[i], (int, float)):
+            return None
         poly[i] *= i
     poly.pop(0)
     
