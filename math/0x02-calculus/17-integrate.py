@@ -7,6 +7,8 @@ def poly_integral(poly, C=0):
 
     if not isinstance(poly, list) or not isinstance(C, (int, float)):
         return None
+    if len(poly) == 0:
+        return None
 
     for i in range(len(poly)):
         poly[i] /= (i + 1)
