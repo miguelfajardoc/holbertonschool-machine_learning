@@ -11,6 +11,8 @@ def poly_integral(poly, C=0):
         return None
 
     for i in range(len(poly)):
+        if not isinstance(poly[i], (int, float)):
+            return None
         poly[i] /= (i + 1)
         if poly[i] == 0 or poly[i] - int(poly[i]) == 0:
             poly[i] = int(poly[i])

@@ -2,7 +2,7 @@
 
 poly_integral = __import__('17-integrate').poly_integral
 
-poly = [5, 3, 0, 1]
+poly = [5, 3, 0, 1, "ll"]
 print(poly_integral(poly, 6))
 poly = []
 print(poly_integral(poly))
