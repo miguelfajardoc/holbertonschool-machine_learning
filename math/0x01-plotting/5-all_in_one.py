@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import NullFormatter
 
 y0 = np.arange(0, 11) ** 3
 
@@ -60,6 +61,9 @@ plt.title('Project A')
 plt.axis([0, 100, 0, 30])
 
 
-plt.setp(graphic2.get_xticklabels(), visible=False)
+#plt.setp(graphic2.get_xticklabels(), visible=False)
+plt.gca().yaxis.set_minor_formatter(NullFormatter())
+plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25, wspace=0.35)
+
 
 plt.show()
