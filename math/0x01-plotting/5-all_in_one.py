@@ -26,44 +26,53 @@ y32 = np.exp((r3 / t32) * x3)
 np.random.seed(5)
 student_grades = np.random.normal(68, 15, 50)
 
+plt.figure()
+plt.subplots_adjust(wspace=0.4, hspace=0.8)
+plt.suptitle("All in one")
+
+#line
 graphic1 = plt.subplot(3, 2, 1)
 graphic1.plot(y0, 'r-')
 graphic1.axis([0, 10, None, None])
+plt.yticks(np.arange(1001, step=500))
 
+#scatter
 graphic2 = plt.subplot(3, 2, 2)
 graphic2.scatter(x1, y1, c="m", marker=".")
-graphic2.set_title("Men's Height vs Weight")
-graphic2.set_ylabel('Weight (lbs)')
-graphic2.set_xlabel('Height (in)')
+graphic2.set_title("Men's Height vs Weight", fontsize="x-small")
+graphic2.set_ylabel('Weight (lbs)', fontsize="x-small")
+graphic2.set_xlabel('Height (in)', fontsize="x-small")
 
+# log
 graphic3 = plt.subplot(3, 2, 3)
 graphic3.plot(x2, y2)
 graphic3.set_yscale('log')
-graphic3.set_title('Exponential Decay of C-14')
-graphic3.set_ylabel('Fraction Remaining')
-graphic3.set_xlabel('Time (years)')
+graphic3.set_title('Exponential Decay of C-14', fontsize="x-small")
+graphic3.set_ylabel('Fraction Remaining', fontsize="x-small")
+graphic3.set_xlabel('Time (years)', fontsize="x-small")
 graphic3.axis([0, 28650, None, None])
 
+#two in one
 graphic4 = plt.subplot(3,2,4)
 graphic4.plot(x3, y31,'--r', label='C-14')
 graphic4.plot(x3, y32, '-g', label='Ra-226')
 graphic4.legend()
-graphic4.set_xlabel('Time (years)')
-graphic4.set_ylabel('Fraction Remaining')
-graphic4.set_title('Exponential Decay of Radioactive Elements')
+graphic4.set_xlabel('Time (years)', fontsize="x-small")
+graphic4.set_ylabel('Fraction Remaining', fontsize="x-small")
+graphic4.set_title('Exponential Decay of Radioactive Elements', fontsize="x-small")
 graphic4.axis([0, 20000, 0, 1])
 
+# Histograma
 graphic5 = plt.subplot(3,1,3)
-plt.hist(student_grades, bins = 15, edgecolor = 'black', linewidth = 1)
-plt.xlabel('Grades')
-plt.ylabel('Number of Students')
-plt.title('Project A')
+grades = np.arange(101, step=10)
+NOfStudents= np.arange(31, step=5)
+plt.hist(student_grades, bins = grades, edgecolor = 'black', linewidth = 1)
+plt.xlabel('Grades', fontsize="x-small")
+plt.ylabel('Number of Students', fontsize="x-small")
+plt.title('Project A', fontsize="x-small")
 plt.axis([0, 100, 0, 30])
-
-
-#plt.setp(graphic2.get_xticklabels(), visible=False)
-plt.gca().yaxis.set_minor_formatter(NullFormatter())
-plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25, wspace=0.35)
+plt.xticks(grades)
+plt.yticks(NOfStudents)
 
 
 plt.show()
