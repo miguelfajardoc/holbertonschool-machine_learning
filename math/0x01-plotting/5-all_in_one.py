@@ -30,13 +30,13 @@ plt.figure()
 plt.subplots_adjust(wspace=0.4, hspace=0.8)
 plt.suptitle("All in one")
 
-#line
+# line
 graphic1 = plt.subplot(3, 2, 1)
 graphic1.plot(y0, 'r-')
 graphic1.axis([0, 10, None, None])
 plt.yticks(np.arange(1001, step=500))
 
-#scatter
+# scatter
 graphic2 = plt.subplot(3, 2, 2)
 graphic2.scatter(x1, y1, c="m", marker=".")
 graphic2.set_title("Men's Height vs Weight", fontsize="x-small")
@@ -52,27 +52,27 @@ graphic3.set_ylabel('Fraction Remaining', fontsize="x-small")
 graphic3.set_xlabel('Time (years)', fontsize="x-small")
 graphic3.axis([0, 28650, None, None])
 
-#two in one
-graphic4 = plt.subplot(3,2,4)
-graphic4.plot(x3, y31,'--r', label='C-14')
+# two in one
+graphic4 = plt.subplot(3, 2, 4)
+graphic4.plot(x3, y31, '--r', label='C-14')
 graphic4.plot(x3, y32, '-g', label='Ra-226')
 graphic4.legend()
 graphic4.set_xlabel('Time (years)', fontsize="x-small")
 graphic4.set_ylabel('Fraction Remaining', fontsize="x-small")
-graphic4.set_title('Exponential Decay of Radioactive Elements', fontsize="x-small")
+graphic4.set_title('Exponential Decay of Radioactive Elements',
+                   fontsize="x-small")
 graphic4.axis([0, 20000, 0, 1])
 
 # Histograma
-graphic5 = plt.subplot(3,1,3)
+graphic5 = plt.subplot(3, 1, 3)
 grades = np.arange(101, step=10)
-NOfStudents= np.arange(31, step=5)
-plt.hist(student_grades, bins = grades, edgecolor = 'black', linewidth = 1)
+NOfStudents = np.arange(31, step=5)
+plt.hist(student_grades, bins=grades, edgecolor='black', linewidth=1)
 plt.xlabel('Grades', fontsize="x-small")
 plt.ylabel('Number of Students', fontsize="x-small")
 plt.title('Project A', fontsize="x-small")
 plt.axis([0, 100, 0, 30])
 plt.xticks(grades)
 plt.yticks(NOfStudents)
-
 
 plt.show()
