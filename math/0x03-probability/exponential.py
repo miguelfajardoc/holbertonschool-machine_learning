@@ -25,7 +25,7 @@ class Exponential:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(1 / (sum(data) / len(data)))
 
-    def pmf(self, k):
+    def pdf(self, k):
         """ calculates the value of the PMF for the given number of successes
             Args:
                  k - the number of "successes"
@@ -37,8 +37,7 @@ class Exponential:
                 return 0
         if k < 0:
             return 0
-        PMF = self.lambtha ** k / (Poisson.factorial(k) * Poisson.e **
-                                   self.lambtha)
+        PMF = self.lambtha / (Exponential.e ** (self.lambtha * k))
         return PMF
 
     def cdf(self, k):
