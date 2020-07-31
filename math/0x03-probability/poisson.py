@@ -42,6 +42,23 @@ class Poisson:
                                    self.lambtha)
         return PMF
 
+    def cdf(self, k):
+        """ Calculates the value of the CDF for a given number of “successes”
+
+        """
+        if not isinstance(k, int):
+            try:
+                k = int(k)
+            except Exception:
+                return 0
+        if k < 0:
+            return 0
+        CDF = 0
+        for i in range(1, k + 1):
+            CDF += self.pmf(i)
+        return CDF
+
+
     @staticmethod
     def factorial(n):
         """ calculates the factorial of a number """
