@@ -14,7 +14,7 @@ class Exponential:
     def __init__(self, data=None, lambtha=1.):
         """ init exponential function """
         if data is None:
-            if lambtha >= 0:
+            if lambtha > 0:
                 self.lambtha = float(lambtha)
             else:
                 raise ValueError("lambtha must be a positive value")
@@ -37,7 +37,7 @@ class Exponential:
                 return 0
         if k < 0:
             return 0
-        PMF = self.lambtha / (Exponential.e ** (self.lambtha * k))
+        PMF = self.lambtha * (Exponential.e ** (-self.lambtha * k))
         return PMF
 
     def cdf(self, k):
