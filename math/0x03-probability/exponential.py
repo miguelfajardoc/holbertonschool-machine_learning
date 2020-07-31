@@ -26,7 +26,7 @@ class Exponential:
             self.lambtha = float(1 / (sum(data) / len(data)))
 
     def pdf(self, k):
-        """ calculates the value of the PMF for the given number of successes
+        """ calculates the value of the PDF for the given number of successes
             Args:
                  k - the number of "successes"
         """
@@ -51,16 +51,5 @@ class Exponential:
                 return 0
         if k < 0:
             return 0
-        CDF = 0
-        for i in range(k + 1):
-            CDF += self.pmf(i)
+        CDF = 1 - Exponential.e ** (-self.lambtha * k)
         return CDF
-
-    @staticmethod
-    def factorial(n):
-        """ calculates the factorial of a number """
-
-        if n <= 1:
-            return 1
-        else:
-            return n * Poisson.factorial(n-1)
