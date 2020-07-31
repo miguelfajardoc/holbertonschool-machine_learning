@@ -37,7 +37,7 @@ class Poisson:
             except Exception:
                 return 0
         if k < 0:
-            return 0;
+            return 0
         PMF = self.lambtha ** k / (Poisson.factorial(k) * Poisson.e **
                                    self.lambtha)
         return PMF
@@ -46,7 +46,7 @@ class Poisson:
     def factorial(n):
         """ calculates the factorial of a number """
 
-        if  n <= 1:
+        if n <= 1:
             return 1
         else:
             return n * Poisson.factorial(n-1)
