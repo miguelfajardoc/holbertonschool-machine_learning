@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-""" Module that contain class Poisson """
+""" Module that contain class Exponential """
 
 
-class Poisson:
-    """ The class that modelate the Poisson distribution
+class Exponential:
+    """ The class that modelate the Exponential distribution
         Args:
              data - list of the data to be used to estimate the distribution
              lambtha - expected number of occurences in a given time frame
@@ -12,7 +12,7 @@ class Poisson:
     e = 2.7182818285
 
     def __init__(self, data=None, lambtha=1.):
-        """ init lambtha function """
+        """ init exponential function """
         if data is None:
             if lambtha >= 0:
                 self.lambtha = float(lambtha)
