@@ -54,10 +54,9 @@ class Poisson:
         if k < 0:
             return 0
         CDF = 0
-        for i in range(1, k + 1):
+        for i in range(k + 1):
             CDF += self.pmf(i)
         return CDF
-
 
     @staticmethod
     def factorial(n):
