@@ -26,7 +26,6 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
 
-
     def pmf(self, k):
         """ calculates the value of the PMF for the given number of successes
             Args:
@@ -35,16 +34,19 @@ class Poisson:
         if not isinstance(k, int):
             try:
                 k = int(k)
-            except:
+            except Exception:
                 return 0
-        PMF = self.lambtha ** k / (Poisson.factorial(k) * Poisson.e ** self.lambtha)
+        if k < 0:
+            return 0;
+        PMF = self.lambtha ** k / (Poisson.factorial(k) * Poisson.e **
+                                   self.lambtha)
         return PMF
 
     @staticmethod
     def factorial(n):
         """ calculates the factorial of a number """
 
-        if n == 0 or n == 1:
+        if  n <= 1:
             return 1
         else:
             return n * Poisson.factorial(n-1)
