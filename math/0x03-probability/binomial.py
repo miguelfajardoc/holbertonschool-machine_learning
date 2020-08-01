@@ -70,8 +70,9 @@ class Binomial:
                 return 0
         if k < 0:
             return 0
-        for succes in range(k + 1):
-            cdf += self.pmf(i)
+        cdf = 0
+        for success in range(k + 1):
+            cdf += self.pmf(success)
         return cdf
 
     @staticmethod
