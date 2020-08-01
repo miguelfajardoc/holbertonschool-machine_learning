@@ -44,25 +44,21 @@ class Binomial:
             sumatory += (x - mean) ** 2
         return sumatory / len(data)
 
-    def z_score(self, x):
-        """ Calculates the z-score of a given x-value
-        """
-        return (x - self.mean) / self.stddev
-
-    def x_value(self, z):
-        """ Calculates the x-value of a given z-score
-        """
-        return (z * self.stddev) + self.mean
-
-    def pdf(self, x):
-        """ calculates the value of the PDF for the given x-value
+    def pmf(self, k):
+        """ calculates the value of the PDF for the given number of successes
             Args:
-                 x - the x-value
+                 k - number of successes
         """
-        denominator = self.stddev * (2 * Normal.pi) ** (1 / 2)
-        exponent = (((x - self.mean) / self.stddev) ** 2) / 2
-        PDF = (Normal.e ** (-exponent)) / denominator
-        return PDF
+        if not isinstance(k, int):
+            try:
+                k = int(k)
+            except Exception:
+                return 0
+        if k < 0:
+            return 0
+        return (Binomial.combinatory(self.n, k) * (self.p ** k) *
+                ((1 - self.p) ** (self.n - k)))
+
 
     def cdf(self, x):
         """ Calculates the value of the CDF for a given x-value
@@ -72,10 +68,17 @@ class Binomial:
         return ((1 + erf) / 2)
 
     @staticmethod
-    def erf(x):
-        """ Calculates the aproximate erf function for a given x-value
+    def combinatory(n, y):
+        """ Calculates the combinatory for two given parameters
         """
-        firstTerm = 2 / (Normal.pi ** (1 / 2))
-        shortSeries = (x - ((x ** 3) / 3) + ((x ** 5) / 10) - ((x ** 7) / 42) +
-                       ((x ** 9) / 216))
-        return firstTerm * shortSeries
+        return (Binomial.factorial(n) / (Binomial.factorial(n - y) *
+                                         Binomial.factorial(y)))
+
+    @staticmethod
+    def factorial(n):
+        """ calculates the factorial of a number """
+
+        if n <= 1:
+            return 1
+        else:
+            return n * Binomial.factorial(n-1)
