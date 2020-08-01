@@ -11,6 +11,7 @@ class Normal:
     """
 
     e = 2.7182818285
+    pi = 3.1415926536
 
     def __init__(self, data=None, mean=0., stddev=1.):
         """ init normal function
@@ -31,7 +32,8 @@ class Normal:
 
     @staticmethod
     def CalcStdDev(mean, data):
-        """ Calculate the standar desviation from a given mean and data """
+        """ Calculate the standar desviation from a given mean and data
+        """
         sumatory = 0
         for x in data:
             sumatory += (x - mean) ** 2
@@ -47,20 +49,15 @@ class Normal:
         """
         return (z * self.stddev) + self.mean
 
-    def pdf(self, k):
-        """ calculates the value of the PDF for the given number of successes
+    def pdf(self, x):
+        """ calculates the value of the PDF for the given x-value
             Args:
-                 k - the number of "successes"
+                 x - the x-value
         """
-        if not isinstance(k, int):
-            try:
-                k = int(k)
-            except Exception:
-                return 0
-        if k < 0:
-            return 0
-        PMF = self.lambtha * (Exponential.e ** (-self.lambtha * k))
-        return PMF
+        denominator = self.stddev * (2 * Normal.pi) ** (1 / 2)
+        exponent = (((x - self.mean) / self.stddev) ** 2) / 2
+        PDF = (Normal.e ** (-exponent)) / denominator
+        return PDF
 
     def cdf(self, k):
         """ Calculates the value of the CDF for a given number of “successes”
