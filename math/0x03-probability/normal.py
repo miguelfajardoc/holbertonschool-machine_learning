@@ -16,7 +16,7 @@ class Normal:
         """ init normal function
         """
         if data is None:
-            if mean > 0 and stddev > 0:
+            if stddev > 0:
                 self.mean = float(mean)
                 self.stddev = float(stddev)
             else:
