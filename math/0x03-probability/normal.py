@@ -13,11 +13,12 @@ class Normal:
     e = 2.7182818285
 
     def __init__(self, data=None, mean=0., stddev=1.):
-        """ init normal function """
+        """ init normal function
+        """
         if data is None:
-            if mean > 0 and stdev > 0:
+            if mean > 0 and stddev > 0:
                 self.mean = float(mean)
-                self.stdev = float(stddev)
+                self.stddev = float(stddev)
             else:
                 raise ValueError("stddev must be a positive value")
         else:
@@ -26,6 +27,7 @@ class Normal:
             elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.mean = float(sum(data) / len(data))
+            self.stddev = Normal.CalcStdDev(self.mean, data)
 
     @staticmethod
     def CalcStdDev(mean, data):
@@ -33,7 +35,7 @@ class Normal:
         sumatory = 0
         for x in data:
             sumatory += (x - mean) ** 2
-        return (sumatory / len(data) ** (1 / 2))
+        return (sumatory / len(data)) ** (1 / 2)
 
     def pdf(self, k):
         """ calculates the value of the PDF for the given number of successes
