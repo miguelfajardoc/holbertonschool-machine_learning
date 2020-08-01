@@ -59,12 +59,20 @@ class Binomial:
         return (Binomial.combinatory(self.n, k) * (self.p ** k) *
                 ((1 - self.p) ** (self.n - k)))
 
-    def cdf(self, x):
-        """ Calculates the value of the CDF for a given x-value
+    def cdf(self, k):
+        """ Calculates the value of the CDF for a given number of successes
 
         """
-        erf = Normal.erf((x - self.mean) / (self.stddev * (2 ** (1 / 2))))
-        return ((1 + erf) / 2)
+        if not isinstance(k, int):
+            try:
+                k = int(k)
+            except Exception:
+                return 0
+        if k < 0:
+            return 0
+        for succes in range(k + 1):
+            cdf += self.pmf(i)
+        return cdf
 
     @staticmethod
     def combinatory(n, y):
