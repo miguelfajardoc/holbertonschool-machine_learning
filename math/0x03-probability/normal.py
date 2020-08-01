@@ -1,29 +1,39 @@
 #!/usr/bin/env python3
-""" Module that contain class Exponential """
+""" Module that contain class Normal """
 
 
-class Exponential:
-    """ The class that modelate the Exponential distribution
+class Normal:
+    """ The class that modelate the Normal distribution
         Args:
              data - list of the data to be used to estimate the distribution
-             lambtha - expected number of occurences in a given time frame
+             mean - the mean of the distribution
+             stddev - is the standard deviation of the distribution
     """
 
     e = 2.7182818285
 
-    def __init__(self, data=None, lambtha=1.):
-        """ init exponential function """
+    def __init__(self, data=None, mean=0., stddev=1.):
+        """ init normal function """
         if data is None:
-            if lambtha > 0:
-                self.lambtha = float(lambtha)
+            if mean > 0 and stdev > 0:
+                self.mean = float(mean)
+                self.stdev = float(stddev)
             else:
-                raise ValueError("lambtha must be a positive value")
+                raise ValueError("stddev must be a positive value")
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
             elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            self.lambtha = float(1 / (sum(data) / len(data)))
+            self.mean = float(sum(data) / len(data))
+
+    @staticmethod
+    def CalcStdDev(mean, data):
+        """ Calculate the standar desviation from a given mean and data """
+        sumatory = 0
+        for x in data:
+            sumatory += (x - mean) ** 2
+        return (sumatory / len(data) ** (1 / 2))
 
     def pdf(self, k):
         """ calculates the value of the PDF for the given number of successes
