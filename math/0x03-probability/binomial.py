@@ -59,7 +59,6 @@ class Binomial:
         return (Binomial.combinatory(self.n, k) * (self.p ** k) *
                 ((1 - self.p) ** (self.n - k)))
 
-
     def cdf(self, x):
         """ Calculates the value of the CDF for a given x-value
 
