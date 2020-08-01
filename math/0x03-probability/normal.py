@@ -59,16 +59,18 @@ class Normal:
         PDF = (Normal.e ** (-exponent)) / denominator
         return PDF
 
-    def cdf(self, k):
-        """ Calculates the value of the CDF for a given number of “successes”
+    def cdf(self, x):
+        """ Calculates the value of the CDF for a given x-value
 
         """
-        if not isinstance(k, int):
-            try:
-                k = int(k)
-            except Exception:
-                return 0
-        if k < 0:
-            return 0
-        CDF = 1 - Exponential.e ** (-self.lambtha * k)
-        return CDF
+        erf = Normal.erf((x - self.mean) / (self.stddev * (2 ** (1 / 2))))
+        return ((1 + erf) / 2)
+
+    @staticmethod
+    def erf(x):
+        """ Calculates the aproximate erf function for a given x-value
+        """
+        firstTerm = 2 / (Normal.pi ** (1 / 2))
+        shortSeries = (x - ((x ** 3) / 3) + ((x ** 5) / 10) - ((x ** 7) / 42) +
+                       ((x ** 9) / 216))
+        return firstTerm * shortSeries
