@@ -25,30 +25,20 @@ class Exponential:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(1 / (sum(data) / len(data)))
 
-    def pdf(self, k):
+    def pdf(self, x):
         """ calculates the value of the PDF for the given number of successes
             Args:
                  k - the number of "successes"
         """
-        if not isinstance(k, int):
-            try:
-                k = int(k)
-            except Exception:
-                return 0
-        if k < 0:
+        if x < 0:
             return 0
-        PMF = self.lambtha * (Exponential.e ** (-self.lambtha * k))
+        PMF = self.lambtha * (Exponential.e ** (-self.lambtha * x))
         return PMF
 
     def cdf(self, k):
         """ Calculates the value of the CDF for a given number of “successes”
 
         """
-        if not isinstance(k, int):
-            try:
-                k = int(k)
-            except Exception:
-                return 0
         if k < 0:
             return 0
         CDF = 1 - Exponential.e ** (-self.lambtha * k)
