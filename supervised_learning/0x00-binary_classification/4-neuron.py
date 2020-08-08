@@ -34,13 +34,7 @@ class Neuron:
         """
         forwardProp = self.forward_prop(X)
         cost = self.cost(Y, self.__A)
-        evaluation = np.zeros(forwardProp.shape)
-        for i in range(len(forwardProp)):
-            for j in range(len(forwardProp[i])):
-                if forwardProp[i][j] >= 0.5:
-                    evaluation[i][j] = int(1)
-                else:
-                    evaluation[i][j] = int(0)
+        evaluation = np.where(self.__A >= 0.5, 1, 0)
         return evaluation, cost
 
     def cost(self, Y, A):
