@@ -38,9 +38,10 @@ class Neuron:
         dz = A - Y
         dw = np.matmul(X, dz.T)
         db = dz
-#        db = sum(dz[0]) / Y.shape[1]
+        db = np.sum(dz) / Y.shape[1]
+
         self.__W = self.__W - (alpha * (dw.T))
-        self.__b = sum(self.__b - (alpha * db[0])) / db.shape[1]
+        self.__b = self.__b - (alpha * db.T)
 
     def evaluate(self, X, Y):
         """
