@@ -32,12 +32,11 @@ class Neuron:
             A is a numpy.ndarray with shape (1, m)
               containing the activated output of the neuron for each example
         """
-        print(A.shape)
-        print(Y.shape)
-        Cost = -(np.matmul(Y, np.log(A.T)) + (np.matmul(1 - Y,
-                                                      np.log(1.0000001 - A.T))))
-        print(Y.shape[1])
-        return(Cost/Y.shape[1])
+        Cost = -(np.matmul(Y, np.log(A.T)) +
+                 (np.matmul(1 - Y, np.log(1.0000001 - A.T))))
+        Cost = Cost.item(0) / Y.shape[1]
+        return Cost
+
 
     def forward_prop(self, X):
         """
