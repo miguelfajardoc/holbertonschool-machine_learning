@@ -4,6 +4,7 @@
 
 import numpy as np
 
+
 class NeuralNetwork:
     """ NeuralNetwork that defines a neural network with one hidden
         layer performing binary classification
