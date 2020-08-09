@@ -65,7 +65,7 @@ class Neuron:
                     iterationGraph[graphIndex] = i
                     costGraph[graphIndex] = cost
                     graphIndex +=1
-            self.__W, self.__b = self.gradient_descent(X, Y, self.__A, alpha)
+            self.gradient_descent(X, Y, self.__A, alpha)
             i += 1
         if graph:
             plt.plot(iterationGraph, costGraph)
