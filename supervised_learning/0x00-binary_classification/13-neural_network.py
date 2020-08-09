@@ -54,7 +54,7 @@ class NeuralNetwork:
         dw2 = np.matmul(dz2, A1.T) / m
         db2 = np.sum(dz2, axis=1, keepdims=True) / m
 
-        dz1 = np.matmul(self.__W2.T, dz2) * (A1 * ( 1 - A1))
+        dz1 = np.matmul(self.__W2.T, dz2) * (A1 * (1 - A1))
         dw1 = np.matmul(dz1, X.T) / Y.shape[1]
         db1 = np.sum(dz1, axis=1, keepdims=1) / m
 
