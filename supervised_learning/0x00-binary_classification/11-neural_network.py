@@ -37,7 +37,6 @@ class NeuralNetwork:
         self.__b2 = 0
         self.__A2 = 0
 
-
     def cost(self, Y, A):
         """
         Calculates the cost of the model using logistic regression
@@ -51,7 +50,6 @@ class NeuralNetwork:
                  (np.matmul(1 - Y, np.log(1.0000001 - A.T))))
         Cost = Cost.item(0) / Y.shape[1]
         return Cost
-
 
     def forward_prop(self, X):
         """
