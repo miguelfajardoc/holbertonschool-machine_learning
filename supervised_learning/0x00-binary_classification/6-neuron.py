@@ -41,10 +41,9 @@ class Neuron:
         if iterations < 0:
             raise ValeError("alpha must be positive")
 
-        while iterations:
+        for i in range(iterations):
             self.__A = self.forward_prop(X)
             self.__W, self.__b = self.gradient_descent(X, Y, self.__A, alpha)
-            iterations -= 1
         return self.evaluate(X, Y)
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
