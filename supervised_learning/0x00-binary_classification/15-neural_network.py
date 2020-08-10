@@ -3,6 +3,7 @@
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class NeuralNetwork:
@@ -37,7 +38,8 @@ class NeuralNetwork:
         self.__b2 = 0
         self.__A2 = 0
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+          graph=True, step=100):
         """
         Trains the neuron
         - X is a numpy.ndarray with shape (nx, m) that contains the input data
@@ -55,10 +57,28 @@ class NeuralNetwork:
         if iterations <= 0:
             raise ValeError("alpha must be positive")
 
-        while iterations:
+        i = 0;
+        if graph is True:
+            iterationGraph = np.empty([int(iterations / step) + 1], int)
+            costGraph = np.empty([int(iterations / step) + 1], float)
+            graphIndex = 0
+        while i <= iterations:
             self.__A1, self.__A2 = self.forward_prop(X)
+            if verbose is True:
+                if i == 0 or i % step == 0 or i == iterations:
+                    cost = self.cost(Y, self.__A2)
+                    print("Cost after {} iterations: {}".format(i, cost))
+                    iterationGraph[graphIndex] = i
+                    costGraph[graphIndex] = cost
+                    graphIndex +=1
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
-            iterations -= 1
+            i += 1
+        if graph:
+            plt.plot(iterationGraph, costGraph)
+            plt.xlabel('iteration')
+            plt.ylabel('cost')
+            plt.title('Training Cost')
+            plt.show()
         return self.evaluate(X, Y)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
