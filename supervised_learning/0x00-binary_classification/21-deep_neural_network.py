@@ -45,6 +45,33 @@ class DeepNeuralNetwork:
             self.__weights[bias] = np.zeros((layers[l], 1))
             prev_inputs = layers[l]
 
+    def gradient_descent(self, Y, cache, alpha=0.05):
+        """
+        Calculates one pass of gradient descent on the neuron
+        - Y is a numpy.ndarray with shape (1, m) that contains the correct
+           labels for the input data
+        - cache is a dictionary containing all the intermediary values of
+          the network
+        - alpha is the learning rate
+        """
+        m = Y.shape[1]
+        layer = self.__L
+        while layer > 0:
+            Akey = 'A{}'.format(layer)
+            Wkey = 'W{}'.format(layer)
+            bkey = 'b{}'.format(layer)
+            A = self.__cache[Akey]
+            W = self.__weights[Wkey]
+            b = self.__weights[bkey]
+            if layer == self.__L:
+                da = (- Y / A) + ((1 - Y) / (1 - A))
+            dz = da * (A * (1 - A))
+            dw = np.matmul(dz, self.__cache['A{}'.format(layer - 1)]) / m
+            db = np.sum(dz, axis=1, keepdims=True) / m
+            da = np.matmul(W.T, dz)
+            self.__weights[Wkey] = W - (alpha * dw)
+            self.__weights[bkey] = b - (alpha * db)
+
     def evaluate(self, X, Y):
         """
         Evaluates the  neural network’s predictions
