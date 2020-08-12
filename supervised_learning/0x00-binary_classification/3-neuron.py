@@ -37,7 +37,6 @@ class Neuron:
         Cost = Cost.item(0) / Y.shape[1]
         return Cost
 
-
     def forward_prop(self, X):
         """
             Calculates the forward propagation of the neuron
