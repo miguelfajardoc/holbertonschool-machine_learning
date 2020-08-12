@@ -13,7 +13,7 @@ def one_hot_encode(Y, classes):
         return None
     if Y.size == 0:
         return None
-    if Y.max() > classes:
+    if 1 + Y.max() > classes:
         return None
     if Y.min() < 0:
         return None
