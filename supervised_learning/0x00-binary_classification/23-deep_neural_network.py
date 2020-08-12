@@ -45,7 +45,8 @@ class DeepNeuralNetwork:
             self.__weights[bias] = np.zeros((layers[l], 1))
             prev_inputs = layers[l]
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
         """
         Trains the deep neural network
         - X is a numpy.ndarray with shape (nx, m) that contains the input data
@@ -60,13 +61,31 @@ class DeepNeuralNetwork:
             raise ValueError("iterations must be a positive integer")
         if not isinstance(alpha, float):
             raise TypeError("alpha must be a float")
-        if alpha < 0:
+        if alpha <= 0:
             raise ValeError("alpha must be positive")
 
-        while iterations:
-            self.forward_prop(X)
+        i = 0;
+        if graph is True:
+            iterationGraph = np.empty([int(iterations / step) + 1], int)
+            costGraph = np.empty([int(iterations / step) + 1], float)
+            graphIndex = 0
+        while i <= iterations:
+            A, _ = self.forward_prop(X)
+            if verbose is True:
+                if i == 0 or i % step == 0 or i == iterations:
+                    cost = self.cost(Y, A)
+                    print("Cost after {} iterations: {}".format(i, cost))
+                    iterationGraph[graphIndex] = i
+                    costGraph[graphIndex] = cost
+                    graphIndex +=1
             self.gradient_descent(Y, self.__cache, alpha)
-            iterations -= 1
+            i += 1
+        if graph:
+            plt.plot(iterationGraph, costGraph)
+            plt.xlabel('iteration')
+            plt.ylabel('cost')
+            plt.title('Training Cost')
+            plt.show()
         return self.evaluate(X, Y)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
