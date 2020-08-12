@@ -10,15 +10,12 @@ def one_hot_encode(Y, classes):
     Hot encode a vector to a one-hot matrix
     """
     if not (isinstance(Y, np.ndarray) or isinstance(classes, int)):
-        print("aa")
         return None
     if Y.size == 0:
         return None
     if Y.max() > classes:
-        print("here")
         return None
     if Y.min() < 0:
-        print("here?")
         return None
     m = len(Y)
     HM = np.zeros((classes, m))
