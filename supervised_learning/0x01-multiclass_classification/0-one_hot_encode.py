@@ -9,7 +9,7 @@ def one_hot_encode(Y, classes):
     """
     Hot encode a vector to a one-hot matrix
     """
-    if not (isinstance(Y, np.ndarray) or isinstance(classes, int)):
+    if not isinstance(Y, np.ndarray) or not isinstance(classes, int)):
         return None
     if Y.size == 0:
         return None
