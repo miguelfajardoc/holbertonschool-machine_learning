@@ -66,11 +66,12 @@ class DeepNeuralNetwork:
             if layer == self.__L:
                 da = (- Y / A) + ((1 - Y) / (1 - A))
             dz = da * (A * (1 - A))
-            dw = np.matmul(dz, self.__cache['A{}'.format(layer - 1)]) / m
+            dw = np.matmul(dz,  self.__cache['A{}'.format(layer - 1)].T) / m
             db = np.sum(dz, axis=1, keepdims=True) / m
             da = np.matmul(W.T, dz)
             self.__weights[Wkey] = W - (alpha * dw)
             self.__weights[bkey] = b - (alpha * db)
+            layer -= 1
 
     def evaluate(self, X, Y):
         """
