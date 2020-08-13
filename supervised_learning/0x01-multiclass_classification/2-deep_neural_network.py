@@ -66,7 +66,7 @@ class DeepNeuralNetwork:
         if alpha <= 0:
             raise ValeError("alpha must be positive")
 
-        i = 0;
+        i = 0
         if graph is True:
             iterationGraph = np.empty([int(iterations / step) + 1], int)
             costGraph = np.empty([int(iterations / step) + 1], float)
@@ -80,7 +80,7 @@ class DeepNeuralNetwork:
                     if graph is True:
                         iterationGraph[graphIndex] = i
                         costGraph[graphIndex] = cost
-                        graphIndex +=1
+                        graphIndex += 1
             self.gradient_descent(Y, self.__cache, alpha)
             i += 1
         if graph:
@@ -172,7 +172,7 @@ class DeepNeuralNetwork:
         """
         Saves the instance object to a file in pickle format
         """
-        if filename[-4:] != ".pkl":
+        if ".pkl" not in filename:
             filename = filename + ".pkl"
         fileObject = open(filename, 'wb')
         pickle.dump(self, fileObject)
