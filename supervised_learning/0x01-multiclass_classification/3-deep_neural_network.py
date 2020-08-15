@@ -112,6 +112,8 @@ class DeepNeuralNetwork:
             if layer == self.__L:
                 da = (- Y / A) + ((1 - Y) / (1 - A))
             dz = da * (A * (1 - A))
+            print("dimensions dz{} - A{}".format(dz.shape, self.__cache['A{}'.format(layer - 1)].T.shape))
+            print("layers: {}".format(self.__L))
             dw = np.matmul(dz,  self.__cache['A{}'.format(layer - 1)].T) / m
             db = np.sum(dz, axis=1, keepdims=True) / m
             da = np.matmul(W.T, dz)
@@ -161,11 +163,11 @@ class DeepNeuralNetwork:
                 bl = self.__weights['b{}'.format(layer)]
                 tempZ = np.matmul(Wl, Alprev) + bl
                 AlKey = 'A{}'.format(layer)
-                if layer == self.__.L:
-                    Al = np.exp(tempZ) / np.sum(np.exp(tempZ), axis=0,
+                if layer == self.__L:
+                Al = np.exp(tempZ) / np.sum(np.exp(tempZ), axis=0,
                                                 keepdims=True)
                 else:
-                    Al = 1 / (1 + np.exp(-tempZ))
+                Al = 1 / (1 + np.exp(-tempZ))
                 self.__cache[AlKey] = Al
         return Al, self.__cache
 
