@@ -14,4 +14,6 @@ def calculate_accuracy(y, y_pred):
     Returns: the prediction of the network in tensor form
 
     """
-    return tf.math.reduce_mean(tf.add(y, y_pred))
+    comparation = tf.equal(tf.argmax(y, axis = 1), tf.argmax(y_pred, axis=1))
+    casting = tf.cast(comparation, tf.float32)
+    return tf.math.reduce_mean(casting)
