@@ -48,7 +48,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                                          feed_dict={x: X_train, y: Y_train})
             costV, AccuracyV = session.run([loss, accuracy],
                                            feed_dict={x: X_valid, y: Y_valid})
-            if index == 0 or index % 100 == 0:
+            if index == 0 or index % 100 == 0 or index == iterations:
                 print("After {} iterations:".format(index))
                 print("\tTraining Cost: {}".format(cost))
                 print("\tTraining Accuracy: {}".format(Accuracy))
