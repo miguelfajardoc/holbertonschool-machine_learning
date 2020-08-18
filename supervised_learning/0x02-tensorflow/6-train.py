@@ -28,9 +28,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
 
     """
     # placeholders
-    print("shapes x{}, y{}".format(X_train.shape, Y_train.shape))
     x, y = create_placeholders(X_train.shape[1], Y_train.shape[1])
-    print(x, y)
     # tensors
     y_pred = forward_prop(x, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
