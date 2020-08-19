@@ -33,10 +33,10 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     tf.add_to_collection('y', y)
     # tensors
     y_pred = forward_prop(x, layer_sizes, activations)
-    loss = calculate_loss(y, y_pred)
-    accuracy = calculate_accuracy(y, y_pred)
     tf.add_to_collection('y_pred', y_pred)
+    loss = calculate_loss(y, y_pred)
     tf.add_to_collection('loss', loss)
+    accuracy = calculate_accuracy(y, y_pred)
     tf.add_to_collection('accuracy', accuracy)
     # Operations
     train_op = create_train_op(loss, alpha)
