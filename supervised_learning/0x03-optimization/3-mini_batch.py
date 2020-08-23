@@ -24,9 +24,9 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
     dataset
     Returns: the path where the model was saved
     """
-    with tf.Session() as sess:
+    with tf.Session() as session:
         new_saver = tf.train.import_meta_graph(load_path + ".meta")
-        new_saver.restore(sess, save_path)
+        new_saver.restore(session, save_path)
         x = tf.get_collection('x')[0]
         y = tf.get_collection('y')[0]
         loss = tf.get_collection('loss')[0]
@@ -37,46 +37,54 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
 
         for epoch in range(epochs):
             cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
-            validationCost, validationAccuracy = session.run([loss, accuracy],
-                                                             feed_dict=feed)
-            print_epoch_status(epoch, cost, accuracy, validationCost,
-                               validationAccuracy)
+            valCost, valAccuracy = session.run([loss, accuracy],
+                                               feed_dict=feedValidation)
+            print_epoch_status(epoch, cost, Accuracy, valCost,
+                               valAccuracy)
             X_train, Y_train = shuffle_data(X_train, Y_train)
             gradient_steps = 0
-            for batch in get_batch(X_train, batch_size, gradient_steps):
-                session.run(train_op, feed_dict=feed)
+            numberOfBatches = X_train.shape[0] / batch_size
+            if X_train.shape[0] % batch_size != 0:
+                numberOfBatches += 1
+            numberOfBatches = int(numberOfBatches)
+            for batchNumber in range(numberOfBatches):
+                batchX, batchY = get_batches(X_train, Y_train, batch_size,
+                                             gradient_steps)
+                session.run(train_op, feed_dict={x: batchX, y: batchY})
                 if gradient_steps != 0 and gradient_steps % 100 == 0:
                     cost, Accuracy = session.run([loss, accuracy],
                                                  feed_dict=feed)
                     print_batch_status(cost, Accuracy, gradient_steps)
                 gradient_steps += 1
-            cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
-            print_batch_status(cost, Accuracy, gradient_steps)
+            # cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
+            # print_batch_status(cost, Accuracy, gradient_steps)
         cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
         validationCost, validationAccuracy = session.run([loss, accuracy],
-                                                             feed_dict=feed)
-        Save_path = saver.save(session, save_path)
+                                                         feed_dict=feed)
+        Save_path = new_saver.save(session, save_path)
         session.close()
     return Save_path
 
 
-def get_batch(X_train, batch_size, gradient_steps):
+def get_batches(X_train, Y_train, batch_size, gradient_steps):
     """ function that returns the minibatch"""
-    return X_train[gradient_steps, batch_size]
+    X_batch = X_train[gradient_steps:gradient_steps + batch_size, :]
+    Y_batch = Y_train[gradient_steps:gradient_steps + batch_size, :]
+    return X_batch, Y_batch
 
 
 def print_batch_status(cost, Accuracy, gradient_steps):
     """ function that print the batch status"""
-    print("\tStep {}:", format(gradient_steps))
-    print("t\tCost: {}", format(cost))
-    print("\tAccuracy {}:", format(Accuracy))
+    print("\t\tStep {}:".format(gradient_steps))
+    print("\t\tCost: {}".format(cost))
+    print("\t\tAccuracy {}:".format(Accuracy))
 
 
 def print_epoch_status(epoch_number, cost, accuracy, validationCost,
                        validationAccuracy):
     """ function that print the epoch status """
-    print("After {} epochs:".format(epoch))
+    print("After {} epochs:".format(epoch_number))
     print("\tTraining Cost: {}".format(cost))
-    print("\tTraining Accuracy: {}".format(Accuracy))
+    print("\tTraining Accuracy: {}".format(accuracy))
     print("\tValidation Cost: {}".format(validationCost))
     print("\tValidation Accuracy: {}".format(validationAccuracy))
