@@ -75,7 +75,7 @@ def get_batches(X_train, Y_train, batch_size, gradient_steps):
 
 def print_batch_status(cost, Accuracy, gradient_steps):
     """ function that print the batch status"""
-    print("\t\tStep {}:".format(gradient_steps))
+    print("\tStep {}:".format(gradient_steps))
     print("\t\tCost: {}".format(cost))
     print("\t\tAccuracy {}:".format(Accuracy))
 
