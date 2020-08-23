@@ -45,11 +45,16 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
             gradient_steps = 0
             for batch in get_batch(X_train, batch_size, gradient_steps):
                 session.run(train_op, feed_dict=feed)
-                if gradient_steps % 100 == 0:
+                if gradient_steps != 0 and gradient_steps % 100 == 0:
                     cost, Accuracy = session.run([loss, accuracy],
                                                  feed_dict=feed)
                     print_batch_status(cost, Accuracy, gradient_steps)
                 gradient_steps += 1
+            cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
+            print_batch_status(cost, Accuracy, gradient_steps)
+        cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
+        validationCost, validationAccuracy = session.run([loss, accuracy],
+                                                             feed_dict=feed)
         Save_path = saver.save(session, save_path)
         session.close()
     return Save_path
