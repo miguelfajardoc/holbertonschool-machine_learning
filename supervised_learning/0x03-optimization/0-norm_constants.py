@@ -2,6 +2,7 @@
 """
 Module of normalization data
 """
+import numpy as np
 
 
 def normalization_constants(X):
@@ -19,4 +20,4 @@ def normalization_constants(X):
     for columnsIter in range(X.shape[1]):
         standarDeviations.append(X[:, columnsIter].std())
         means.append(X[:, columnsIter].mean())
-    return means, standarDeviations
+    return np.array(means), np.array(standarDeviations)
