@@ -3,6 +3,7 @@
 Module of normalization data
 """
 
+
 def normalization_constants(X):
     """
     function that calculates the normalization (standardization) constants of
@@ -16,6 +17,6 @@ def normalization_constants(X):
     standarDeviations = []
 
     for columnsIter in range(X.shape[1]):
-        standarDeviations.append(X[:,columnsIter].std())
-        means.append(X[:,columnsIter].mean())
+        standarDeviations.append(X[:, columnsIter].std())
+        means.append(X[:, columnsIter].mean())
     return means, standarDeviations
