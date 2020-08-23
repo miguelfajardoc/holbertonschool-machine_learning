@@ -61,6 +61,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
         validationCost, validationAccuracy = session.run([loss, accuracy],
                                                          feed_dict=feed)
+        print_epoch_status(epoch, cost, Accuracy, valCost, valAccuracy)
         Save_path = new_saver.save(session, save_path)
         session.close()
     return Save_path
@@ -77,7 +78,7 @@ def print_batch_status(cost, Accuracy, gradient_steps):
     """ function that print the batch status"""
     print("\tStep {}:".format(gradient_steps))
     print("\t\tCost: {}".format(cost))
-    print("\t\tAccuracy {}:".format(Accuracy))
+    print("\t\tAccuracy: {}".format(Accuracy))
 
 
 def print_epoch_status(epoch_number, cost, accuracy, validationCost,
