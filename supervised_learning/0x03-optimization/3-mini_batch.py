@@ -58,6 +58,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                 gradient_steps += 1
             # cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
             # print_batch_status(cost, Accuracy, gradient_steps)
+        epoch += 1
         cost, Accuracy = session.run([loss, accuracy], feed_dict=feed)
         validationCost, validationAccuracy = session.run([loss, accuracy],
                                                          feed_dict=feed)
