@@ -69,8 +69,9 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
 
 def get_batches(X_train, Y_train, batch_size, gradient_steps):
     """ function that returns the minibatch"""
-    X_batch = X_train[gradient_steps:gradient_steps + batch_size, :]
-    Y_batch = Y_train[gradient_steps:gradient_steps + batch_size, :]
+    batch_step = gradient_steps * batch_size
+    X_batch = X_train[batch_step:batch_step + batch_size, :]
+    Y_batch = Y_train[batch_step:batch_step + batch_size, :]
     return X_batch, Y_batch
 
 
