@@ -19,5 +19,5 @@ def f1_score(confusion):
     """
     recall = sensitivity(confusion)
     prec = precision(confusion)
-    F1 = 2 * (prec * recall) / (prec + recall)
-    return F1
+    f1 = 2 * prec * recall / (prec + recall)
+    return f1
