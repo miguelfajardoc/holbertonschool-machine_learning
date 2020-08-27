@@ -6,19 +6,18 @@ Module of create Adam optimization algoritm
 
 def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
     """
-    function that updates a variable in place using the Adam optimization
-    algorithm:
-    - alpha is the learning rate
-    - beta1 is the weight used for the first moment
-    - beta2 is the weight used for the second moment
-    - epsilon is a small number to avoid division by zero
-    - var is a numpy.ndarray containing the variable to be updated
-    - grad is a numpy.ndarray containing the gradient of var
-    - v is the previous first moment of var
-    - s is the previous second moment of var
-    - t is the time step used for bias correction
-    Returns: the updated variable, the new first moment, and the new second
-    moment, respectively
+    function that updates the learning rate using inverse time decay in numpy:
+
+    - alpha is the original learning rate
+    - decay_rate is the weight used to determine the rate at which alpha will
+      decay
+    - global_step is the number of passes of gradient descent that have elapsed
+    - decay_step is the number of passes of gradient descent that should occur
+      before alpha is decayed further
+    the learning rate decay should occur in a stepwise fashion
+    Returns: the updated value for alpha
+
     """
-    alpha += 1
+    step = int(global_step / decay_step)
+    alpha = alpha / (1 + decay_rate * step)
     return alpha
