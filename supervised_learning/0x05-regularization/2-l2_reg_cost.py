@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """ modulo to regularization con tensor flow """
 
+import tensorflow as tf
+
 
 def l2_reg_cost(cost):
     """
@@ -11,4 +13,4 @@ def l2_reg_cost(cost):
     Returns: a tensor containing the cost of the network accounting
     for L2 regularization
     """
-    return cost.get_regularization_losses()
+    return cost + tf.losses.get_regularization_losses()
