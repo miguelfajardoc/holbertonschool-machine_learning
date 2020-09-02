@@ -16,7 +16,7 @@ def optimize_model(network, alpha, beta1, beta2):
 
     """
     adam = K.optimizers.Adam(lr=alpha, beta_1=beta1, beta_2=beta2)
-    model.compile(optimizer=adam,
+    network.compile(optimizer=adam,
                   loss='categorical_crossentropy',
                   metrics=["accuracy"])
     return None
