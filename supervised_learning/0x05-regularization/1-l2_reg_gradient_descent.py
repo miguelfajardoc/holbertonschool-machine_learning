@@ -20,7 +20,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     The weights and biases of the network should be updated in place
     """
     weights_copy = weights.copy()
-    m = Y.shape[1]
+    _, m = Y.shape
     for layer in range(L, 0, -1):
         keyW = "W{}".format(layer)
         keyB = "b{}".format(layer)
@@ -36,7 +36,6 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         dw = np.matmul(dz, cache[keyAprev].T) / m
         dw_l2 = dw + (lambtha * weights[keyW] / m)
         db = np.sum(dz, axis=1, keepdims=True) / m
-
 
         weights[keyW] = weights_copy[keyW] - alpha * dw_l2
         weights[keyB] = weights_copy[keyB] - alpha * db
