@@ -17,12 +17,14 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     Returns: the keras model
     """
     model = K.Sequential()
-    model.add(K.Input(shape=(nx,)))
-    for index in range(len(layers)):
+    model.add(K.layers.Dense(layers[0],
+                             activation=activations[0],
+                             kernel_regularizer=K.regularizers.l2(lambtha),
+                             input_dim=nx))
+    for index in range(1, (layers)):
+        model.add(K.layers.Dropout(1 - keep_prob))
         model.add(K.layers.Dense(layers[index],
                                  activation=activations[index],
                                  kernel_regularizer=K.regularizers.l2(lambtha)
                                  ))
-        if (index < len(layers) - 1):
-            model.add(K.layers.Dropout(1 - keep_prob))
     return model
