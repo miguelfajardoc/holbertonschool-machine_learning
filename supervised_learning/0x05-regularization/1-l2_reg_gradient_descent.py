@@ -32,9 +32,9 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         else:
             keyWnext = "W{}".format(layer + 1)
             derivate = 1 - cache[keyA] ** 2
-            dz = np.matmul(weights[keyWnext].T, dz) * derivate
+            dz = np.matmul(weights_copy[keyWnext].T, dz) * derivate
         dw = np.matmul(dz, cache[keyAprev].T) / m
-        dw_l2 = dw + lambtha * weights[keyW] / m
+        dw_l2 = dw + lambtha * weights_copy[keyW] / m
         db = np.sum(dz, axis=1, keepdims=True) / m
 
         weights[keyW] = weights_copy[keyW] - alpha * dw_l2
