@@ -16,12 +16,12 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     You are not allowed to use the Input class
     Returns: the keras model
     """
-    model = K.Sequential()
+    model = K.models.Sequential()
     model.add(K.layers.Dense(layers[0],
                              activation=activations[0],
                              kernel_regularizer=K.regularizers.l2(lambtha),
                              input_dim=nx))
-    for index in range(1, (layers)):
+    for index in range(1, len(layers)):
         model.add(K.layers.Dropout(1 - keep_prob))
         model.add(K.layers.Dense(layers[index],
                                  activation=activations[index],
