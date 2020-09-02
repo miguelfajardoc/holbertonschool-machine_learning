@@ -19,21 +19,15 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     # model = K.models.Sequential()
     leng = len(layers)
     inputs = K.Input(shape=(nx,))
-    dense = K.layers.Dense(layers[0],
-                           activation=activations[0],
-                           kernel_regularizer=K.regularizers.l2(lambtha)
-                           )
-    x = dense(inputs)
-    for index in range(1, leng - 1):
-        x = K.layers.Dropout(1 - keep_prob)(x)
+    x = K.layers.Dense(layers[0],
+                       activation=activations[0],
+                       kernel_regularizer=K.regularizers.l2(lambtha)
+                       )(inputs)
+    for index in range(1, leng):
+        drop = K.layers.Dropout(1 - keep_prob)(x)
         x = K.layers.Dense(layers[index],
                            activation=activations[index],
                            kernel_regularizer=K.regularizers.l2(lambtha)
-                           )(x)
-    x = K.layers.Dropout(1 - keep_prob)(x)
-    outputs = K.layers.Dense(layers[leng - 1],
-                             activation=activations[leng - 1],
-                             kernel_regularizer=K.regularizers.l2(lambtha)
-                             )(x)
-    model = K.Model(inputs=inputs, outputs=outputs)
+                           )(drop)
+    model = K.Model(inputs=inputs, outputs=x)
     return model
