@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" modulo to regularization con tensor flow """
+""" modulo to regularization con tensor flow layer"""
 
 import tensorflow as tf
 
@@ -14,8 +14,9 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     Returns: the output of the new layer
     """
     regularizer = tf.contrib.layers.l2_regularizer(lambtha)
-    kernel_init = tf.contrib.layers.variance_scaling_initializer
-    (mode="FAN_AVG")
-    layer = tf.layers.Dense(n, activation, kernel_initializer=kernel_init,
+    kernel_init = tf.contrib.layers.variance_scaling_initializer(
+        mode="FAN_AVG")
+    layer = tf.layers.Dense(n, activation=activation,
+                            kernel_initializer=kernel_init,
                             kernel_regularizer=regularizer)
     return layer(prev)
