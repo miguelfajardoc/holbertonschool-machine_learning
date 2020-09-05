@@ -22,8 +22,8 @@ def convolve_grayscale_same(images, kernel):
     Returns: a numpy.ndarray containing the convolved images
     """
     kh, kw = kernel.shape
-    padding_w = (int)((kw - 1) / 2)
-    padding_h = (int)((kh - 1) / 2)
+    padding_w = int((kw - 1) / 2)
+    padding_h = int((kh - 1) / 2)
     m, h, w = images.shape
     if kh % 2 != 0:
         out_w = w + 2 * padding_w - kw + 1
