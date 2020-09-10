@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import matplotlib.pyplot as plt
 import numpy as np
 convolve_grayscale_same = __import__('1-convolve_grayscale_same').convolve_grayscale_same
 
@@ -14,3 +15,8 @@ print(kernel.shape)
 conv_ims = convolve_grayscale_same(images, kernel)
 print(conv_ims)
 print(conv_ims.shape)
+
+plt.imshow(images[0], cmap = 'gray')
+plt.show()
+plt.imshow(conv_ims[0], cmap = 'gray')
+plt.show()
