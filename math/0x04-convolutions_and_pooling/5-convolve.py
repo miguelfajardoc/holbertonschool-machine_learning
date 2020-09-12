@@ -15,8 +15,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
         h is the height in pixels of the images
         w is the width in pixels of the images
         c is the number of channels in the image
-    - kernel is a numpy.ndarray with shape (kh, kw, c, nc) containing the kernel
-    for the convolution
+    - kernel is a numpy.ndarray with shape (kh, kw, c, nc) containing the
+    kernel for the convolution
         kh is the height of the kernel
         kw is the width of the kernel
         nk is the numbre of kernels
@@ -54,7 +54,9 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     for k in range(nk):
         for i in range(final_h):
             for j in range(final_w):
-                conv[:, i, j, k] = np.sum(images_padded[:, (i * sh):kh + (i * sh),
-                                                     (j * sw):kw + (j * sw)]
-                                          * kernels[:,:,:,k], axis=(1, 2, 3))
+                conv[:, i, j, k] = np.sum(images_padded[:, (i * sh):kh +
+                                                        (i * sh),
+                                                        (j * sw):kw + (j * sw)]
+                                          * kernels[:, :, :, k],
+                                          axis=(1, 2, 3))
     return conv
