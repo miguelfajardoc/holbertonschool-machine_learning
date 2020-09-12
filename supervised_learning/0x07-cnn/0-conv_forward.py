@@ -25,9 +25,10 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     - b is a numpy.ndarray of shape (1, 1, 1, c_new) containing the biases
     applied to the convolution
     - activation is an activation function applied to the convolution
-    - padding is a string that is either same or valid, indicating the  type  of
-    padding used
-    - stride is a tuple of (sh, sw) containing the strides for the convolution
+    - padding is a string that is either same or valid, indicating the  type
+    of padding used
+    - stride is a tuple of (sh, sw) containing the strides for the
+    convolution
         sh is the stride for the height
         sw is the stride for the width
     - Returns: the output of the convolutional layer
@@ -54,11 +55,12 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     for k in range(nk):
         for i in range(final_h):
             for j in range(final_w):
-                conv[:, i, j, k] = activation(np.sum(images_padded[:, (i * sh):kh +
-                                                        (i * sh),
-                                                        (j * sw):kw + (j * sw)]
-                                          * W[:, :, :, k],
-                                          axis=(1, 2, 3)))
-
+                conv[:, i, j, k] = activation(np.sum(images_padded[:,
+                                                                   (i * sh):kh
+                                                                   + (i * sh),
+                                                                   (j * sw):kw
+                                                                   + (j * sw)]
+                                                     * W[:, :, :, k],
+                                                     axis=(1, 2, 3)))
         conv[:, :, :, k] += b[0, 0, 0, k]
     return conv
