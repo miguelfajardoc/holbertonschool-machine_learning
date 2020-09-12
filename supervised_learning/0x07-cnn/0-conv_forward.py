@@ -40,27 +40,26 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     sh, sw = stride
 
     if padding == 'same':
-        ph = int((((h - 1) * sh + kh - h) / 2) + 1)
-        pw = int((((w - 1) * sw + kw - w) / 2) + 1)
+        ph = int((((h - 1) * sh + kh - h) / 2))
+        pw = int((((w - 1) * sw + kw - w) / 2))
     elif isinstance(padding, tuple):
         ph, pw = padding
     final_h = int(((h + 2 * ph - kh) // sh) + 1)
     final_w = int(((w + 2 * pw - kw) // sw) + 1)
 
     images_padded = np.pad(A_prev, ((0,), (ph,),
-                                    (pw,), (0,)), 'constant')
-    #  print("padded images {}".format(images_padded.shape))
+                                    (pw,), (0,)), 'constant',
+                           constant_values=0)
     conv = np.ndarray((m, final_h, final_w, nk))
-    # print("result images {}".format(result_imgs.shape))
     for k in range(nk):
         for i in range(final_h):
             for j in range(final_w):
-                conv[:, i, j, k] = activation(np.sum(images_padded[:,
-                                                                   (i * sh):kh
-                                                                   + (i * sh),
-                                                                   (j * sw):kw
-                                                                   + (j * sw)]
-                                                     * W[:, :, :, k],
-                                                     axis=(1, 2, 3)))
-        conv[:, :, :, k] += b[0, 0, 0, k]
+                conv[:, i, j, k] = np.sum(images_padded[:,
+                                                        (i * sh):kh
+                                                        + (i * sh),
+                                                        (j * sw):kw
+                                                        + (j * sw)]
+                                          * W[:, :, :, k],
+                                          axis=(1, 2, 3))
+        conv[:, :, :, k] = activation(conv[:, :, :, k] + b[0, 0, 0, k])
     return conv
